@@ -66,8 +66,11 @@ class NavbarComponent extends HTMLElement {
     scrollToSection(event) {
       event.preventDefault();
       const targetId = event.target.getAttribute('href').substring(1);
+      console.log('Target ID:', targetId); // Debugging line
       const targetSection = document.getElementById(targetId);
+      console.log('Target Section:', targetSection); // Debugging line
       if (targetSection) {
+        console.log('Scrolling to section:', targetSection); // Debugging line
         if ('scrollBehavior' in document.documentElement.style) {
           targetSection.scrollIntoView({ behavior: 'smooth' });
         } else {
@@ -75,9 +78,10 @@ class NavbarComponent extends HTMLElement {
           window.scrollTo({ top: offsetTop, behavior: 'smooth' });
         }
         history.pushState(null, '', `#${targetId}`);
+      } else {
+        console.error('Section not found:', targetId); // Debugging line
       }
     }
   }
   
   customElements.define('navbar-component', NavbarComponent);
-  
